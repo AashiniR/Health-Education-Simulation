@@ -1,0 +1,135 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #05070d;
+  --color-ink-2: #0a1222;
+  --color-accent: #4da3ff;
+  --color-accent-strong: #2f86ff;
+  --color-accent-soft: #9ccbff;
+  --color-line: rgba(90, 169, 255, 0.28);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  height: 100%;
+  background: var(--color-ink);
+  color: #e8f1ff;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+/* Glass panels: dark translucent, blurred, thin blue border. */
+.glass {
+  background: rgba(9, 16, 32, 0.74);
+  border: 1px solid var(--color-line);
+  backdrop-filter: blur(10px) saturate(1.2);
+  -webkit-backdrop-filter: blur(10px) saturate(1.2);
+  box-shadow:
+    0 10px 40px -12px rgba(0, 0, 0, 0.7),
+    inset 0 1px 0 rgba(156, 203, 255, 0.06);
+}
+
+/* Slow devices: drop the (expensive) blur, keep the look. */
+.low-power .glass {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background: rgba(8, 14, 28, 0.93);
+}
+
+/* Visible keyboard focus everywhere. */
+:focus-visible {
+  outline: 3px solid #9ccbff;
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.8rem;
+  font-weight: 600;
+  line-height: 1.1;
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    color 150ms,
+    transform 150ms;
+  user-select: none;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn-primary {
+  background: linear-gradient(180deg, #3d95ff, #1f6fe0);
+  color: white;
+  box-shadow: 0 6px 24px -8px rgba(47, 134, 255, 0.8);
+}
+.btn-primary:hover {
+  background: linear-gradient(180deg, #57a4ff, #2a7cf0);
+}
+.btn-ghost {
+  background: rgba(77, 163, 255, 0.08);
+  border: 1px solid rgba(90, 169, 255, 0.3);
+  color: #dbeaff;
+}
+.btn-ghost:hover {
+  background: rgba(77, 163, 255, 0.18);
+  border-color: rgba(120, 185, 255, 0.55);
+}
+.btn[disabled],
+.btn[aria-disabled="true"] {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.title-glow {
+  background: linear-gradient(180deg, #ffffff 10%, #9ccbff 60%, #4da3ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 40px rgba(77, 163, 255, 0.35);
+}
+
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(90, 169, 255, 0.4) transparent;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.spin-slow {
+  animation: spin-slow 1.4s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
